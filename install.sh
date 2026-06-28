@@ -276,6 +276,27 @@ smoke_test() {
 }
 
 # ============================================================================
+# smoke test: reorder data file
+# ============================================================================
+
+smoke_test_read() {
+    if [[ "$SKIP_SMOKE" -eq 1 ]]; then
+        log "Skipping smoke test (--no-smoke)."
+        return
+    fi
+    [[ -f "$GGUF_PATH" ]] || { warn "$GGUF_PATH missing — skipping smoke test."; return; }
+
+    log "Smoke test: reorder lines in smoke-test-read-data.txt …"
+    local rc=0
+    (cd "$DS4_SRC_DIR" && bash scripts/smoke-test-read.sh --gguf "$GGUF_PATH") || rc=$?
+    if [[ $rc -eq 0 ]]; then
+        ok "Smoke test read PASSED — model reordered lines correctly."
+    else
+        die "Smoke test read FAILED — model could not reorder lines."
+    fi
+}
+
+# ============================================================================
 # 5. optional: start server
 # ============================================================================
 
@@ -318,6 +339,7 @@ verify_host
 clone_and_build
 download_models
 smoke_test
+smoke_test_read
 start_server
 
 echo

@@ -15,7 +15,7 @@ DS4_GGUF_DIR="${DS4_GGUF_DIR:-$HOME/gguf}"
 GGUF_FILE="${GGUF_FILE:-DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2.gguf}"
 GGUF_PATH="${GGUF_PATH:-$DS4_GGUF_DIR/$GGUF_FILE}"
 PORT=""
-DATA_FILE="scripts/data.txt"
+DATA_FILE="scripts/smoke-test-read-data.txt"
 EXPECT_RE='<h1>\n.*<h2>\n.*<h3>\n.*<h4>\n.*<h5>\n.*<h6>'
 
 while [[ $# -gt 0 ]]; do
