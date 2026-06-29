@@ -288,7 +288,7 @@ smoke_test_read() {
 
     log "Smoke test: reorder lines in smoke-test-read-data.txt …"
     local rc=0
-    (cd "$DS4_SRC_DIR" && bash scripts/smoke-test-read.sh --gguf "$GGUF_PATH") || rc=$?
+    (cd "$(cd "$(dirname "$0")" && pwd)" && bash scripts/smoke-test-read.sh --gguf "$GGUF_PATH") || rc=$?
     if [[ $rc -eq 0 ]]; then
         ok "Smoke test read PASSED — model reordered lines correctly."
     else
